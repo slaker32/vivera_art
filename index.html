@@ -10,6 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="./src/css/owl.carousel.css">
     <link rel="stylesheet" href="./src/css/owl.carousel.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
@@ -57,12 +61,6 @@
     <section class="main_block">
         <div class="info">
             <div class="wrapper">
-                <!-- <div class="page_nav">
-                    <div class="current_page">01</div>
-                    <div class="page_down">
-                        <img src="./src/img/down.svg" alt="">
-                    </div>
-                </div> -->
                 <div class="bg_img">
                     <img src="./src/img/Header bg 1.png" alt="">
                 </div>
@@ -71,7 +69,7 @@
                     <p>Любимое фото 
                         в наилучшем качестве!</p>
                     <button>
-                            ЗАКАЗАТЬ ПОРТРЕТ
+                            <a class="scroll-to" href="#calc">ЗАКАЗАТЬ ПОРТРЕТ</a>
                     </button>
                 </div>
             </div>
@@ -190,20 +188,31 @@
                 <form action="#" class="form_calc">
                     <select name="" id="calc_size">
                         <option value="">Выберите размер</option>
-                        <option value="0.25">30х40 СМ</option>
-                        <option value="0.3">40х50 СМ</option>
-                        <option value="0.3">40х60 СМ</option>
-                        <option value="0.4">50х60 СМ</option>
-                        <option value="0.5">50х70 СМ</option>
-                        <option value="0.8">60х80 СМ</option>
-                        <option value="0.9">70х90 СМ</option>
-                        <option value="1">80х100 СМ</option>
-                        <option value="1.45">90х120 СМ</option>
+                        <option value="3040">30х40 СМ</option>
+                        <option value="3050">30х50 СМ</option>
+                        <option value="4040">40х40 СМ</option>
+                        <option value="4050">40х50 СМ</option>
+                        <option value="4060">40х60 СМ</option>
+                        <option value="5050">50х50 СМ</option>
+                        <option value="5060">50х60 СМ</option>
+                        <option value="5070">50х70 СМ</option>
+                        <option value="6070">60х70 СМ</option>
+                        <option value="6080">60х80 СМ</option>
+                        <option value="7070">70х70 СМ</option>
+                        <option value="7080">70х80 СМ</option>
+                        <option value="7090">70х90 СМ</option>
+                        <option value="8080">80х80 СМ</option>
+                        <option value="8090">80х90 СМ</option>
+                        <option value="80100">80х100 СМ</option>
+                        <option value="9090">90х90 СМ</option>
+                        <option value="90100">90х100 СМ</option>
+                        <option value="90110">90х110 СМ</option>
+                        <option value="90120">90х120 СМ</option>
                     </select>
                     <select name="" id="calc_material">
                         <option value="">Выберите материал</option>
-                        <option value="4300">Хлопковая основа</option>
-                        <option value="3400">Синтетическая основа</option>
+                        <option value="cotton">Хлопковая основа</option>
+                        <option value="synth">Синтетическая основа</option>
                     </select>
                     <button type="button" class="btn_calc">Расчитать</button>
                 </form>
@@ -225,7 +234,7 @@
                     <div class="total_price_discount">
                         Цена со скидкой 0 рублей
                     </div>
-                    <button>Заказать со скидкой 10%</button>
+                    <button class="order_btn">Заказать со скидкой 10%</button>
                 </div>
             </div>
         </div>

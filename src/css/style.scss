@@ -271,6 +271,10 @@ header {
                     margin-top: 10px;
                     font-size: 10px;
                 }
+                a {
+                    text-decoration: none;
+                    color: none;
+                }
             }
         }
     }
@@ -915,7 +919,11 @@ footer {
     position: absolute;
     // left: 0;
     // top: 0;
+    .popup_hidden_elem {
+        display: none !important;
+    }
     form {
+        justify-content: center;
         width: 650px;
         height: 470px;
         position: relative;
@@ -1023,8 +1031,21 @@ footer {
             color: white;
             margin-top: 50px;
         }
+        .popup_thanks {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            .thanks_title {
+                font-size: 40px;
+                text-align: center;
+            }
+            span {
+                font-size: 16px;
+            }
+        }
     }
 }
+
 .popup_show {
     display: flex;
 }

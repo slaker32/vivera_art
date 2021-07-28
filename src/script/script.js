@@ -83,25 +83,74 @@ const mobile_menu = () => {
 mobile_menu();
 
 const calc = () => {
+    const COTTON = 'cotton';
+    const SYNTH = 'synth';
     const discount = document.querySelector('.total_price_discount')
     const resultBtn = document.querySelector('.btn_calc');
     let selectSize = document.getElementById('calc_size');
-    let size = selectSize.options[selectSize.selectedIndex].value;
     let selectMaterial = document.getElementById('calc_material');
-    let materialIndex = selectMaterial.options[selectMaterial.selectedIndex].value;
-    let material = selectMaterial.options[selectMaterial.selectedIndex].text;
     const resultMaterial = document.querySelector('.res_material');
-    const resultSum = document.querySelector('.total_price')
-
+    const resultSum = document.querySelector('.total_price');
+    const priceCotton = {
+        3040 : '1100',
+        3050 : '1250',
+        4040 : '1300',
+        4050: '1450',
+        4060: '1650',
+        5050: '1700',
+        5060: '1900',
+        5070: '2150',
+    };
+    const priceSynth = {
+        3040 : '850',
+        3050 : '950',
+        4040 : '1000',
+        4050: '1250',
+        4060: '1400',
+        5050: '1350',
+        5060: '1500',
+        5070: '1700',
+        6070: '1900',
+        6080: '2100',
+        7070: '2300',
+        7080: '2450',
+        7090: '2600',
+        8080: '2700',
+        8090: '2900',
+        80100:'3150',
+        9090: '2950',
+        90100:'3300',
+        90110:'3500',
+        90120:'3800'
+    }
     resultBtn.addEventListener('click',() => {
         resultBtn.preventDefault;
-        let size = selectSize.options[selectSize.selectedIndex].value;
-        let materialIndex = selectMaterial.options[selectMaterial.selectedIndex].value;
+        let sizeValue = selectSize.options[selectSize.selectedIndex].value;
+        let materialValue = selectMaterial.options[selectMaterial.selectedIndex].value;
         let material = selectMaterial.options[selectMaterial.selectedIndex].text;
-        if (materialIndex != '' && size != '') {
+        const getSum = (obj) => {
+            for (key in obj) {
+                if (typeof obj[sizeValue] === "undefined") {
+                    resultSum.innerHTML = `Нет в наличие`
+                    discount.innerHTML = `Выберите синтетическую основу`;
+                    return null
+                } 
+                if (key === sizeValue && typeof obj[key] !== "undefined") {
+                    resultSum.innerHTML = `${obj[key]} рублей`
+                    discount.innerHTML = `Цена со скидкой ${obj[key] * 0.9} рублей`;
+                    return null
+                }
+            }
+        }
+        if (materialValue != '' && size != '') {
             resultMaterial.innerHTML = material;
-            resultSum.innerHTML = size * materialIndex + 'рублей'
-            discount.innerHTML = `Цена со скидкой ${(size * materialIndex) * 0.9} рублей`;
+            if (materialValue === COTTON) {
+                getSum(priceCotton)
+            }
+            if(materialValue === SYNTH) {
+                getSum(priceSynth)
+            }
+            
         }
 
 
@@ -170,15 +219,32 @@ const runPopup = () => {
     const popup = document.querySelector('.popup'),
           popupClose = document.querySelector('.form_close'),
           body = document.querySelector('.body'),
-          btn = document.querySelector('.popup_btn')
-          form = document.querySelector('.popup_form')
+          btn = document.querySelector('.popup_btn'),
+          form = document.querySelector('.popup_form'),
+          btn_order = document.querySelector('.order_btn'),
+          newArrayStyled = [];
     let posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-
+    let thanks;
     popup.addEventListener('submit',(e) => {
         e.preventDefault();
         let data = new FormData(e.target);
         console.log(data.get('popup_name'))
         
+    })
+    btn_order.addEventListener('click',() => {
+        popup_show()
+    })
+    btn.addEventListener('click',() => {
+        let data = [].slice.call(form.children)
+        data.forEach(elem => {
+            if (elem.classList.contains('form_bg_img') || elem.classList.contains('form_close') ) {
+                return false
+            } else {
+                elem.classList.add('popup_hidden_elem')
+                newArrayStyled.push(elem)
+            }
+        })
+        setTimeout(initThanks,500)
     })
 
 
@@ -194,10 +260,36 @@ const runPopup = () => {
         popup.style.top = `${posTop}px`
     }
     popupClose.addEventListener('click',() => {
+
+        if(newArrayStyled.length != 0) {
+            thanks.remove();
+            newArrayStyled.forEach(elem => {
+                elem.classList.remove('popup_hidden_elem')
+            })
+        }
             popup_hide();
     })
     setTimeout(popup_show,10000)
+    const initThanks = () => {
+            thanks = document.createElement('div'),
+            thanksTitle = document.createElement('div'),
+            thanksDescr = document.createElement('span');
+            const createThanks = () => {
+                thanks.classList.add('popup_thanks')
+                thanks.classList.add('animate__animated')
+                thanksTitle.classList.add('thanks_title')
+                thanksTitle.innerText = `Спасибо!`
+                thanksDescr.innerText = `В ближайшее время с Вами свяжется наш менеджер`
+                thanks.appendChild(thanksTitle)
+                thanks.appendChild(thanksDescr)
+                form.appendChild(thanks)
+                thanks.classList.add('animate__zoomIn')
+
+            }
+
+        createThanks()
+    }
 }
 runPopup()
-document.cookie = "user=John";
-console.log(document.cookie)
+
+
