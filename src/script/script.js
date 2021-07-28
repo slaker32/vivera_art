@@ -222,29 +222,33 @@ const runPopup = () => {
           btn = document.querySelector('.popup_btn'),
           form = document.querySelector('.popup_form'),
           btn_order = document.querySelector('.order_btn'),
+          inputs = form.querySelectorAll('.popup_data input');
           newArrayStyled = [];
     let posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
     let thanks;
     popup.addEventListener('submit',(e) => {
         e.preventDefault();
-        let data = new FormData(e.target);
-        console.log(data.get('popup_name'))
-        
     })
     btn_order.addEventListener('click',() => {
         popup_show()
     })
     btn.addEventListener('click',() => {
-        let data = [].slice.call(form.children)
-        data.forEach(elem => {
-            if (elem.classList.contains('form_bg_img') || elem.classList.contains('form_close') ) {
-                return false
-            } else {
-                elem.classList.add('popup_hidden_elem')
-                newArrayStyled.push(elem)
-            }
-        })
-        setTimeout(initThanks,500)
+        let data = [].slice.call(form.children);
+        let formData = new FormData(form);
+        if(formData.get('popup_phone') !== '') {
+            inputs[1].classList.remove('input_err')
+            data.forEach(elem => {
+                if (elem.classList.contains('form_bg_img') || elem.classList.contains('form_close') ) {
+                    return false
+                } else {
+                    elem.classList.add('popup_hidden_elem')
+                    newArrayStyled.push(elem)
+                }
+            })
+            setTimeout(initThanks,500)
+        } else {
+            inputs[1].classList.add('input_err')
+        }
     })
 
 
@@ -255,12 +259,15 @@ const runPopup = () => {
     }
     const popup_show = () => {
         posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        inputs.forEach(elem => {
+            elem.value = ''
+        })
         popup.classList.add('popup_show')
         body.classList.add('body_anchor')
         popup.style.top = `${posTop}px`
     }
     popupClose.addEventListener('click',() => {
-
+        inputs[1].classList.remove('input_err')
         if(newArrayStyled.length != 0) {
             thanks.remove();
             newArrayStyled.forEach(elem => {
@@ -289,6 +296,11 @@ const runPopup = () => {
 
         createThanks()
     }
+    window.addEventListener('keydown',(e) => {
+        if(inputs[1].value !== '') {
+            inputs[1].classList.remove('input_err')
+        }
+    })
 }
 runPopup()
 

@@ -917,8 +917,6 @@ footer {
     height: 100vh;
     z-index: 100;
     position: absolute;
-    // left: 0;
-    // top: 0;
     .popup_hidden_elem {
         display: none !important;
     }
@@ -995,7 +993,10 @@ footer {
                 margin-top: 30px;
                 border: none;
                 outline: none;
-
+                box-sizing: border-box;
+            }
+            .input_err {
+                border: 2px solid red;
             }
         }
         .chekbox {

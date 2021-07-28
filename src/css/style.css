@@ -1464,6 +1464,12 @@ footer .mailing form .mailing_check {
   margin-top: 30px;
   border: none;
   outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.popup form .popup_data .input_err {
+  border: 2px solid red;
 }
 
 .popup form .chekbox {
